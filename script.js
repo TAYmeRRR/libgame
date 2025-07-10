@@ -55,6 +55,9 @@ const canvas = document.getElementById('fireworks-canvas');
 const ctx = canvas.getContext('2d');
 const successMsg = document.getElementById('success-message');
 
+const invitationModal = document.getElementById('invitation-modal');
+const modalCloseBtn = document.getElementById('modal-close-btn');
+
 let cw, ch;
 let particles = [];
 let animationFrameId;
@@ -105,7 +108,6 @@ function createPolybiusSquare() {
   }
 }
 
-// Создаём квадрат и добавляем кликабельность букв
 createPolybiusSquare();
 addClickListenersToCells();
 
@@ -123,7 +125,6 @@ function addClickListenersToCells() {
   });
 }
 
-// Проверка по нажатию Enter
 answerInput.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     checkBtn.click();
@@ -132,7 +133,7 @@ answerInput.addEventListener('keydown', (event) => {
 
 let currentIndex = 0;
 const totalQuestions = questions.length;
-const answeredCorrectly = new Array(totalQuestions).fill(false); // отслеживаем правильные ответы
+const answeredCorrectly = new Array(totalQuestions).fill(false);
 
 function loadQuestion(index) {
   if (questions.length === 0) {
@@ -192,8 +193,7 @@ checkBtn.onclick = () => {
     const allCorrect = answeredCorrectly.every(val => val === true);
 
     if (allCorrect) {
-      showResult(`Дорогие друзья!!!!!
-Межпоселенческая центральная библиотека им. И.М. Бондаренко приглашает всех желающих принять участие в Международном фестивале-конкурсе " Война. Судьба. Книга. Игорь Бондаренко и Иван Мележ", прием заявок и творческих работ по 30.11.2025, подробности о https://vk.com/away.php?to=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1-uLz8B9lyv4LKWahaWYBUff862Ik7ytC%2Fedit%3Ftab%3Dt.0&utf=1`, true);
+      showInvitationModal();
 
       answerInput.disabled = true;
       checkBtn.disabled = true;
@@ -205,13 +205,12 @@ checkBtn.onclick = () => {
       showResult("Верно!", true);
       startFireworks();
 
-      // Переходим к следующему неотвеченному вопросу
       let nextIndex = currentIndex + 1;
       while (nextIndex < totalQuestions && answeredCorrectly[nextIndex]) {
         nextIndex++;
       }
       if (nextIndex >= totalQuestions) {
-        nextIndex = currentIndex; // если все следующие отвечены, остаёмся
+        nextIndex = currentIndex;
       }
       loadQuestion(nextIndex);
     }
@@ -325,3 +324,24 @@ function startFireworks() {
   }, 400);
   animate();
 }
+
+// Модальное окно приглашения
+function showInvitationModal() {
+  invitationModal.style.display = 'flex';
+  modalCloseBtn.focus();
+  document.body.style.overflow = 'hidden';
+}
+
+function hideInvitationModal() {
+  invitationModal.style.display = 'none';
+  document.body.style.overflow = '';
+  answerInput.focus();
+}
+
+modalCloseBtn.addEventListener('click', hideInvitationModal);
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && invitationModal.style.display === 'flex') {
+    hideInvitationModal();
+  }
+});
