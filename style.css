@@ -457,3 +457,28 @@ h1 {
   outline: none;
 }
 #modal-close-btn {
+  margin-top: 25px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a3e5c;
+  background: linear-gradient(135deg,#a3d8f4,#7ec8f8);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(126, 200, 248, 0.8);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
+  user-select: none;
+}
+#modal-close-btn:hover {
+  background: linear-gradient(135deg,#7ec8f8,#a3d8f4);
+  color: #0f2a42;
+  box-shadow: 0 8px 30px #7ec8f8;
+  transform: scale(1.1);
+}
+#modal-close-btn:active {
+  transform: scale(0.95);
+}
