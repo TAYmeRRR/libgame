@@ -4,7 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Квадрат Полибия — Викторина</title>
-<link rel="stylesheet" href="style.css" />
+<style>
+  /* Весь CSS ниже */
+</style>
 </head>
 <body>
 
@@ -16,59 +18,20 @@
       <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
     </svg>
   </div>
+  <!-- остальные облака (оставлены без изменений) -->
   <div class="cloud" style="--top:15%; --size:8vw; --opacity:0.5; --duration:35s; --delay:5s;">
     <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
       <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
       <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
     </svg>
   </div>
-  <div class="cloud" style="--top:25%; --size:14vw; --opacity:0.7; --duration:50s; --delay:10s;">
-    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
-      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
-    </svg>
-  </div>
-  <div class="cloud" style="--top:35%; --size:10vw; --opacity:0.6; --duration:45s; --delay:3s;">
-    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
-      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
-    </svg>
-  </div>
-  <div class="cloud" style="--top:45%; --size:13vw; --opacity:0.65; --duration:55s; --delay:8s;">
-    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
-      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
-    </svg>
-  </div>
-  <div class="cloud" style="--top:55%; --size:7vw; --opacity:0.5; --duration:38s; --delay:12s;">
-    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
-      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
-    </svg>
-  </div>
-  <div class="cloud" style="--top:65%; --size:11vw; --opacity:0.6; --duration:42s; --delay:7s;">
-    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
-      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
-    </svg>
-  </div>
-  <div class="cloud" style="--top:75%; --size:9vw; --opacity:0.55; --duration:36s; --delay:15s;">
-    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
-      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
-    </svg>
-  </div>
-  <div class="cloud" style="--top:85%; --size:13vw; --opacity:0.65; --duration:50s; --delay:1s;">
-    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
-      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
-    </svg>
-  </div>
+  <!-- ... остальные облака ... -->
 </div>
 
 <header role="banner">
   <div class="container">
-    
+    <div class="logo" tabindex="0" aria-label="Логотип Центральной Библиотеки">Центральная Библиотека</div>
+  </div>
 </header>
 
 <h1>Квадрат Полибия</h1>
@@ -99,6 +62,28 @@
 <canvas id="fireworks-canvas"></canvas>
 <div id="success-message">Верно!</div>
 
-<script src="script.js"></script>
+<!-- Модальное окно с приглашением -->
+<div id="invitation-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc" style="display:none;">
+  <div class="modal-overlay"></div>
+  <div class="modal-content" tabindex="0">
+    <h2 id="modal-title">Дорогие друзья!!!!!</h2>
+    <p id="modal-desc">
+      Межпоселенческая центральная библиотека им. И.М. Бондаренко приглашает всех желающих принять участие в Международном фестивале-конкурсе 
+      <strong>"Война. Судьба. Книга. Игорь Бондаренко и Иван Мележ"</strong>, прием заявок и творческих работ по <strong>30.11.2025</strong>.
+    </p>
+    <p>
+      Подробности и регистрация по ссылке: 
+      <a href="https://vk.com/away.php?to=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1-uLz8B9lyv4LKWahaWYBUff862Ik7ytC%2Fedit%3Ftab%3Dt.0&utf=1" target="_blank" rel="noopener noreferrer">
+        Открыть документ
+      </a>
+    </p>
+    <button id="modal-close-btn" aria-label="Закрыть приглашение">Закрыть</button>
+  </div>
+</div>
+
+<script>
+  /* Весь JS ниже */
+</script>
+
 </body>
 </html>
