@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Квадрат Полибия — Викторина</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Облака -->
+<div class="clouds-container" aria-hidden="true" aria-label="Анимация облаков на фоне">
+  <div class="cloud" style="--top:5%; --size:12vw; --opacity:0.6; --duration:40s; --delay:0s;">
+    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
+      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
+    </svg>
+  </div>
+  <div class="cloud" style="--top:15%; --size:8vw; --opacity:0.5; --duration:35s; --delay:5s;">
+    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
+      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
+    </svg>
+  </div>
+  <div class="cloud" style="--top:25%; --size:14vw; --opacity:0.7; --duration:50s; --delay:10s;">
+    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
+      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
+    </svg>
+  </div>
+  <div class="cloud" style="--top:35%; --size:10vw; --opacity:0.6; --duration:45s; --delay:3s;">
+    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
+      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
+    </svg>
+  </div>
+  <div class="cloud" style="--top:45%; --size:13vw; --opacity:0.65; --duration:55s; --delay:8s;">
+    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
+      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
+    </svg>
+  </div>
+  <div class="cloud" style="--top:55%; --size:7vw; --opacity:0.5; --duration:38s; --delay:12s;">
+    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
+      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
+    </svg>
+  </div>
+  <div class="cloud" style="--top:65%; --size:11vw; --opacity:0.6; --duration:42s; --delay:7s;">
+    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
+      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
+    </svg>
+  </div>
+  <div class="cloud" style="--top:75%; --size:9vw; --opacity:0.55; --duration:36s; --delay:15s;">
+    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
+      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
+    </svg>
+  </div>
+  <div class="cloud" style="--top:85%; --size:13vw; --opacity:0.65; --duration:50s; --delay:1s;">
+    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
+      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
+    </svg>
+  </div>
+</div>
+
+<header role="banner">
+  <div class="container">
+    <div class="logo" tabindex="0" aria-label="Логотип Центральной Библиотеки">Центральная Библиотека</div>
+    <nav role="navigation" aria-label="Основное меню">
+      <a href="index.html" tabindex="0">Главная</a>
+      <a href="catalog.html" tabindex="0">Каталог</a>
+      <a href="events.html" tabindex="0">События</a>
+      <a href="game.html" tabindex="0" aria-current="page">Игра</a>
+      <a href="personalii2.html" tabindex="0">Персоналии</a>
+      <a href="#contacts" tabindex="0">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+<h1>Квадрат Полибия</h1>
+
+<div id="main-content-wrapper">
+  <div id="polybius-container" aria-label="Квадрат Полибия с русскими буквами и номерами строк и столбцов"></div>
+  <div id="question-box" role="region" aria-label="Вопрос для разгадывания">
+    <h2>Вопрос</h2>
+    <div id="question-text"></div>
+    <div id="cipher-text" style="margin-top:12px; font-size:1rem; color:#555; font-family: monospace; user-select:text;"></div>
+    <div style="margin-top:15px; display:flex; gap:30px; justify-content:center;">
+      <button id="prevQuestionBtn" aria-label="Предыдущий вопрос" class="fancy-btn">
+        <span class="icon-arrow left"></span>
+      </button>
+      <button id="nextQuestionBtn" aria-label="Следующий вопрос" class="fancy-btn">
+        <span class="icon-arrow right"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="interaction">
+  <input id="answerInput" type="text" placeholder="Введите ответ..." autocomplete="off" aria-label="Поле для ввода ответа" />
+  <button id="checkBtn" aria-label="Проверить ответ">Проверить</button>
+  <div id="result" role="alert" aria-live="polite"></div>
+</div>
+
+<canvas id="fireworks-canvas"></canvas>
+<div id="success-message">Верно!</div>
+
+<script src="script.js"></script>
+</body>
+</html>
