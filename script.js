@@ -26,7 +26,7 @@ const rawQuestions = [
   { q: "Назовите актера, в честь которого мама писателя его назвала?", a: ["ГАРРИ ПИЛЬ"] },
   { q: "В каком возрасте Игорь Михайлович Бондаренко был угнан в Германию?", a: ["ЧЕТЫРНАДЦАТЬ ЛЕТ", "ЧЕТЫРНАДЦАТЬ"] },
   { q: "Назовите лагерь, куда попал в плен Игорь Михайлович Бондаренко?", a: ["СПОРТ-ПАЛАСТ"] },
-  { q: "Лагерный номер писателя?", a: ["ЧЕТЫРЕ ТЫСЯЧИ СЕМЬСОТ СЕМДЕСЯТ ЧЕТЫРЕ"] },
+  { q: "Лагерный номер писателя?", a: ["ЧЕТЫРЕ ТЫСЯЧИ СЕМЬСОТ СЕМЬДЕСЯТ ЧЕТЫРЕ"] },
   { q: "Назовите главную героиню одноименной повести Игоря Михайловича Бондаренко?", a: ["АСТРИД"] },
   { q: "Назовите повесть, которая была включена в список рекомендательной литературы «советским разведчикам»?", a: ["КТО ПРИДЕТ НА МАРИИНЕ"] },
   { q: "В каком литературном журнале работал Игорь Бондаренко?", a: ["ДОН"] },
@@ -43,7 +43,6 @@ const questions = rawQuestions.map(item => ({
   cipher: generateCipher(item.a[0])
 }));
 
-// DOM элементы
 const polybiusContainer = document.getElementById('polybius-container');
 const questionTextEl = document.getElementById('question-text');
 const cipherTextEl = document.getElementById('cipher-text');
@@ -60,9 +59,7 @@ let cw, ch;
 let particles = [];
 let animationFrameId;
 let resultTimeoutId = null;
-let currentIndex = 0;
 
-// Размеры холста
 function resize() {
   cw = window.innerWidth;
   ch = window.innerHeight;
@@ -98,7 +95,6 @@ function createPolybiusSquare() {
       polybiusContainer.appendChild(cell);
     }
   }
-  // Добавляем номера сверху и слева
   for(let col=1; col<=6; col++) {
     const colNum = document.createElement('div');
     colNum.className = 'col-num';
@@ -108,6 +104,10 @@ function createPolybiusSquare() {
     polybiusContainer.appendChild(colNum);
   }
 }
+
+// Создаём квадрат и добавляем кликабельность букв
+createPolybiusSquare();
+addClickListenersToCells();
 
 function addClickListenersToCells() {
   const cells = document.querySelectorAll('#polybius-container .cell');
@@ -122,6 +122,17 @@ function addClickListenersToCells() {
     });
   });
 }
+
+// Проверка по нажатию Enter
+answerInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    checkBtn.click();
+  }
+});
+
+let currentIndex = 0;
+const totalQuestions = questions.length;
+const answeredCorrectly = new Array(totalQuestions).fill(false); // отслеживаем правильные ответы
 
 function loadQuestion(index) {
   if (questions.length === 0) {
@@ -151,19 +162,13 @@ function loadQuestion(index) {
 
 loadQuestion(currentIndex);
 
-// Обработчики
 prevQuestionBtn.onclick = () => {
   loadQuestion(currentIndex - 1);
 };
+
 nextQuestionBtn.onclick = () => {
   loadQuestion(currentIndex + 1);
 };
-
-answerInput.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') {
-    checkBtn.click();
-  }
-});
 
 checkBtn.onclick = () => {
   let userAnswer = answerInput.value.toUpperCase().trim().replace(/\s+/g, ' ');
@@ -180,9 +185,36 @@ checkBtn.onclick = () => {
   }
 
   const isCorrect = correctAnswers.includes(userAnswer);
+
   if (isCorrect) {
-    showResult("Верно!", true);
-    startFireworks();
+    answeredCorrectly[currentIndex] = true;
+
+    const allCorrect = answeredCorrectly.every(val => val === true);
+
+    if (allCorrect) {
+      showResult(`Дорогие друзья!!!!!
+Межпоселенческая центральная библиотека им. И.М. Бондаренко приглашает всех желающих принять участие в Международном фестивале-конкурсе " Война. Судьба. Книга. Игорь Бондаренко и Иван Мележ", прием заявок и творческих работ по 30.11.2025, подробности о https://vk.com/away.php?to=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1-uLz8B9lyv4LKWahaWYBUff862Ik7ytC%2Fedit%3Ftab%3Dt.0&utf=1`, true);
+
+      answerInput.disabled = true;
+      checkBtn.disabled = true;
+      prevQuestionBtn.disabled = true;
+      nextQuestionBtn.disabled = true;
+
+      startFireworks();
+    } else {
+      showResult("Верно!", true);
+      startFireworks();
+
+      // Переходим к следующему неотвеченному вопросу
+      let nextIndex = currentIndex + 1;
+      while (nextIndex < totalQuestions && answeredCorrectly[nextIndex]) {
+        nextIndex++;
+      }
+      if (nextIndex >= totalQuestions) {
+        nextIndex = currentIndex; // если все следующие отвечены, остаёмся
+      }
+      loadQuestion(nextIndex);
+    }
   } else {
     showResult("Неверно", false);
   }
@@ -210,7 +242,6 @@ function showResult(message, isCorrect) {
   }
 }
 
-// Анимация фейерверков
 class Particle {
   constructor(x, y, color) {
     this.x = x;
@@ -294,9 +325,3 @@ function startFireworks() {
   }, 400);
   animate();
 }
-
-// Инициализация
-window.onload = () => {
-  createPolybiusSquare();
-  addClickListenersToCells();
-};
