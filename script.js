@@ -132,8 +132,6 @@ answerInput.addEventListener('keydown', (event) => {
 });
 
 let currentIndex = 0;
-const totalQuestions = questions.length;
-const answeredCorrectly = new Array(totalQuestions).fill(false);
 
 function loadQuestion(index) {
   if (questions.length === 0) {
@@ -188,31 +186,24 @@ checkBtn.onclick = () => {
   const isCorrect = correctAnswers.includes(userAnswer);
 
   if (isCorrect) {
-    answeredCorrectly[currentIndex] = true;
+    showResult("Верно!", true);
+    startFireworks();
 
-    const allCorrect = answeredCorrectly.every(val => val === true);
+    const lastQuestionText = "Укажите количество конкурсов-номинаций международного фестиваля конкурса «Война. Судьба. Книга. Игорь Бондаренко и Иван Мележ»?";
 
-    if (allCorrect) {
-      showInvitationModal();
+    if (currentQuestion.question === lastQuestionText) {
+      setTimeout(() => {
+        showInvitationModal();
 
-      answerInput.disabled = true;
-      checkBtn.disabled = true;
-      prevQuestionBtn.disabled = true;
-      nextQuestionBtn.disabled = true;
-
-      startFireworks();
+        answerInput.disabled = true;
+        checkBtn.disabled = true;
+        prevQuestionBtn.disabled = true;
+        nextQuestionBtn.disabled = true;
+      }, 1200);
     } else {
-      showResult("Верно!", true);
-      startFireworks();
-
       let nextIndex = currentIndex + 1;
-      while (nextIndex < totalQuestions && answeredCorrectly[nextIndex]) {
-        nextIndex++;
-      }
-      if (nextIndex >= totalQuestions) {
-        nextIndex = currentIndex;
-      }
-      loadQuestion(nextIndex);
+      if (nextIndex >= questions.length) nextIndex = 0;
+      setTimeout(() => loadQuestion(nextIndex), 1200);
     }
   } else {
     showResult("Неверно", false);
@@ -325,7 +316,6 @@ function startFireworks() {
   animate();
 }
 
-// Модальное окно приглашения
 function showInvitationModal() {
   invitationModal.style.display = 'flex';
   modalCloseBtn.focus();
