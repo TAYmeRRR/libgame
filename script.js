@@ -334,4 +334,4 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && invitationModal.style.display === 'flex') {
     hideInvitationModal();
   }
-});
+};
