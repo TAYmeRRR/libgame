@@ -4,30 +4,30 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Квадрат Полибия — Викторина</title>
-<style>
-  /* Весь CSS ниже */
-</style>
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<!-- Облака -->
-<div class="clouds-container" aria-hidden="true" aria-label="Анимация облаков на фоне">
-  <div class="cloud" style="--top:5%; --size:12vw; --opacity:0.6; --duration:40s; --delay:0s;">
-    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
-      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
-    </svg>
+<!-- Модальное окно -->
+<div id="invitation-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
+  <div class="modal-overlay"></div>
+  <div class="modal-content" tabindex="0">
+    <h2 id="modal-title">Дорогие друзья!!!!!</h2>
+    <p id="modal-desc">
+      Межпоселенческая центральная библиотека им. И.М. Бондаренко приглашает всех желающих принять участие в Международном фестивале-конкурсе 
+      <strong>"Война. Судьба. Книга. Игорь Бондаренко и Иван Мележ"</strong>, прием заявок и творческих работ по <strong>30.11.2025</strong>.
+    </p>
+    <p>
+      Подробности и регистрация по ссылке: 
+      <a href="https://vk.com/away.php?to=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1-uLz8B9lyv4LKWahaWYBUff862Ik7ytC%2Fedit%3Ftab%3Dt.0&utf=1" target="_blank" rel="noopener noreferrer">
+        Открыть документ
+      </a>
+    </p>
+    <button id="modal-close-btn" aria-label="Закрыть приглашение">Закрыть</button>
   </div>
-  <!-- остальные облака (оставлены без изменений) -->
-  <div class="cloud" style="--top:15%; --size:8vw; --opacity:0.5; --duration:35s; --delay:5s;">
-    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <ellipse cx="20" cy="20" rx="20" ry="15" fill="white" />
-      <ellipse cx="40" cy="20" rx="20" ry="15" fill="white" />
-    </svg>
-  </div>
-  <!-- ... остальные облака ... -->
 </div>
 
+<!-- Основной контент (ваш существующий HTML) -->
 <header role="banner">
   <div class="container">
     <div class="logo" tabindex="0" aria-label="Логотип Центральной Библиотеки">Центральная Библиотека</div>
@@ -41,7 +41,7 @@
   <div id="question-box" role="region" aria-label="Вопрос для разгадывания">
     <h2>Вопрос</h2>
     <div id="question-text"></div>
-    <div id="cipher-text" style="margin-top:12px; font-size:1rem; color:#555; font-family: monospace; user-select:text;"></div>
+    <div id="cipher-text"></div>
     <div style="margin-top:15px; display:flex; gap:30px; justify-content:center;">
       <button id="prevQuestionBtn" aria-label="Предыдущий вопрос" class="fancy-btn">
         <span class="icon-arrow left"></span>
@@ -62,28 +62,7 @@
 <canvas id="fireworks-canvas"></canvas>
 <div id="success-message">Верно!</div>
 
-<!-- Модальное окно с приглашением -->
-<div id="invitation-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc" style="display:none;">
-  <div class="modal-overlay"></div>
-  <div class="modal-content" tabindex="0">
-    <h2 id="modal-title">Дорогие друзья!!!!!</h2>
-    <p id="modal-desc">
-      Межпоселенческая центральная библиотека им. И.М. Бондаренко приглашает всех желающих принять участие в Международном фестивале-конкурсе 
-      <strong>"Война. Судьба. Книга. Игорь Бондаренко и Иван Мележ"</strong>, прием заявок и творческих работ по <strong>30.11.2025</strong>.
-    </p>
-    <p>
-      Подробности и регистрация по ссылке: 
-      <a href="https://vk.com/away.php?to=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1-uLz8B9lyv4LKWahaWYBUff862Ik7ytC%2Fedit%3Ftab%3Dt.0&utf=1" target="_blank" rel="noopener noreferrer">
-        Открыть документ
-      </a>
-    </p>
-    <button id="modal-close-btn" aria-label="Закрыть приглашение">Закрыть</button>
-  </div>
-</div>
-
-<script>
-  /* Весь JS ниже */
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
+
